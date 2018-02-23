@@ -137,14 +137,14 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       if (result && result.then) {
         ret = result.then(
           data => {
-            const res = responseHandler(null, data);
+            const res = responseHandler(null, data, dispatch);
             if (res === undefined) {
               return data;
             } else {
               return res;
             }
           },
-          err => responseHandler(err)
+          err => responseHandler(err, null, dispatch)
         );
       } else {
         ret = responseHandler(result);

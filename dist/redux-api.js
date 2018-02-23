@@ -1295,14 +1295,14 @@ function actionFn(url, name, options) {
     if (responseHandler) {
       if (result && result.then) {
         ret = result.then(function (data) {
-          var res = responseHandler(null, data);
+          var res = responseHandler(null, data, dispatch);
           if (res === undefined) {
             return data;
           } else {
             return res;
           }
         }, function (err) {
-          return responseHandler(err);
+          return responseHandler(err, null, dispatch);
         });
       } else {
         ret = responseHandler(result);
