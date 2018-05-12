@@ -18,9 +18,9 @@ function toJSON(resp) {
   }
 }
 
-export default function(fetch) {
-  return (url, opts) =>
-    fetch(url, opts).then(resp => {
+export default function (fetch) {
+  return function (url, opts) {
+    return fetch(url, opts).then(function (resp) {
       // Normalize IE9's response to HTTP 204 when Win error 1223.
       const status = resp.status === 1223 ? 204 : resp.status;
       const statusText = resp.status === 1223 ? "No Content" : resp.statusText;
@@ -37,4 +37,5 @@ export default function(fetch) {
         });
       }
     });
+  }
 }
